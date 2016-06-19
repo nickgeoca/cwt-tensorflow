@@ -39,3 +39,4 @@ plt.subplot(212) # Plot CWT of wave
 plt.imshow(result, aspect='auto', interpolation='nearest') 
 plt.show()
 ```
+![](https://github.com/nickgeoca/cwt-tensorflow/blob/master/example.png)
