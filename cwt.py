@@ -31,7 +31,8 @@ def cwtRicker(wav, widthCwt):
     # Initialize and run while loop
     emptyCwtMatrix = tf.zeros([length, 0], dtype='float32') 
     i = tf.constant(1)
-    result = tf.while_loop(cond_, body, [i, emptyCwtMatrix], back_prop=False, parallel_iterations=1024)
+    _, result = tf.while_loop(cond_, body, [i, emptyCwtMatrix], back_prop=False, parallel_iterations=1024)
+    result = tf.transpose(result)
 
     return result
 

@@ -21,19 +21,21 @@ cwt(wav, signal.ricker, range(1,n))
 
 ## Usage
 ```python
-import tensorflow as tf
-import matplotlib.pyplot as plt 
-import numpy as np
-from cwt import cwtRicker
-
-widthCwt = 64
+# Create 1-D wave
+widthCwt = 256
 wav = np.sin(np.arange(1000) / 20.)
 
+# Run CWT
 sess = tf.Session()
 cwtOp = cwtRicker(wav, widthCwt)
 result = sess.run(cwtOp)
 sess.close()
 
-result = result[1]
-result = np.transpose(result)
+# Plot cwt and wave
+plt.figure(1)
+plt.subplot(211) # Plot wave
+plt.plot(wav)   
+plt.subplot(212) # Plot CWT of wave
+plt.imshow(result, aspect='auto', interpolation='nearest') 
+plt.show()
 ```
