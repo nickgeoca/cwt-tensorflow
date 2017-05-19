@@ -1,7 +1,7 @@
 # Tensorflow CWT
-This implements a 1-D Continuous Wavelet Transform (CWT) using a Ricker wavelet in tensorflow. It is very similar to scipy's cwt routine, excpet is slightly limited but is much faster.
+This implements a 1-D Continuous Wavelet Transform (CWT) using a Ricker wavelet in tensorflow. It is very similar to scipy's cwt routine, excpet is slightly limited yet much faster.
 
-It has the advantage of running in parallel on a GPU and is about 8x faster than an old laptop i5 using a GTX 750 TI (~1.3GPLOPS). This is done by using tensorflow's parallel while_loop function.
+It has the advantage of running in parallel on a GPU and is about 8x faster than an old laptop i5 using a GTX 750 TI (~1,400 GFLOPS). This is done by using tensorflow's parallel while_loop function.
 
 One caveat of using this is the accuracy. Currently this api and scipy's cwt both limit the Ricker wavelet samples to 10x the scale size. What this means for both libarires is that they are both much faster at the cost of a very small numerical error.
 
