@@ -21,7 +21,7 @@ def cwtRicker(wav, widthCwt):
         v = conv1DWavelet(wav, i, rickerWavelet)
         v = tf.reshape(v, [length, 1])
 
-        m = tf.concat(1, [m,v])
+        m = tf.concat([m,v], 1)
 
         return [1 + i, m]
 
@@ -31,7 +31,14 @@ def cwtRicker(wav, widthCwt):
     # Initialize and run while loop
     emptyCwtMatrix = tf.zeros([length, 0], dtype='float32') 
     i = tf.constant(1)
-    _, result = tf.while_loop(cond_, body, [i, emptyCwtMatrix], back_prop=False, parallel_iterations=1024)
+    _, result = tf.while_loop(
+            cond_,
+            body,
+            [i, emptyCwtMatrix],
+            shape_invariants=[i.get_shape(), tf.TensorShape([length, None])],
+            back_prop=False,
+            parallel_iterations=1024,
+            )
     result = tf.transpose(result)
 
     return result
@@ -73,7 +80,7 @@ def rickerWavelet(scale, sampleCount):
 def conv1DWavelet(wav, waveletWidth, waveletEquation):
     kernelSamples = waveletWidth * 10
     kernel = waveletEquation(waveletWidth, kernelSamples)
-    kernel = tf.reshape(kernel, tf.pack([kernelSamples,1,1,1]))
+    kernel = tf.reshape(kernel, tf.stack([kernelSamples,1,1,1]))
 
     conv = tf.nn.conv2d(wav, kernel, [1,1,1,1], padding='SAME') 
     conv = tf.squeeze(tf.squeeze(conv))
