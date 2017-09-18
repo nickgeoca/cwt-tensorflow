@@ -1,8 +1,10 @@
 import tensorflow as tf
 import numpy as np
 
-def cwtRicker(wav, widthCwt):
-    """Continuous Wavelet Transform using Ricker wavelet 
+# Run the cwtRicker, cwtMortlet
+
+"""
+Continuous Wavelet Transforms
     Parameters
     ----------
     wav:      matrix - float32 - shape (N,)
@@ -11,14 +13,20 @@ def cwtRicker(wav, widthCwt):
     Returns
     -------
     output:   matrix - float32 - shape (widthCwt, N)
-    """
+"""
+def cwtRicker(wav, widthCwt):  return cwt(wav, widthCwt, rickerWavelet)
+def cwtMortlet(wav, widthCwt): return cwt(wav, widthCwt, mortletWavelet)
+    
+# ------------------------------------------------------
+
+def cwt(wav, widthCwt, wavelet):
     length = wav.shape[0]
     wav = tf.to_float(wav)
     wav = tf.reshape(wav, [1,length,1,1])
 
     # While loop functions
     def body(i, m): 
-        v = conv1DWavelet(wav, i, rickerWavelet)
+        v = conv1DWavelet(wav, i, wavelet)
         v = tf.reshape(v, [length, 1])
 
         m = tf.concat([m,v], 1)
@@ -43,12 +51,10 @@ def cwtRicker(wav, widthCwt):
 
     return result
 
-
+# ------------------------------------------------------
+#                 wavelets
 def rickerWavelet(scale, sampleCount):
-    scale = tf.to_float(scale)
-    sampleCount = tf.to_float(sampleCount)
-
-    def rickerWaveletEquationPart(time): 
+    def waveEquation(time): 
         time = tf.to_float(time)
         
         tSquare = time ** 2.
@@ -70,13 +76,25 @@ def rickerWavelet(scale, sampleCount):
 
         return _1 * _2 * _3
         
-    unscaledTimes   = tf.to_float(tf.range(tf.to_int32(sampleCount))) - (sampleCount - 1.) / 2.
-    times           = unscaledTimes / scale
-    unscaledSamples = rickerWaveletEquationPart(times)
-    samples         = unscaledSamples * scale ** -.5
+    return waveletHelper(scale, sampleCount, waveEquation)
 
-    return samples
+def mortletWavelet(scale, sampleCount):
+    def waveEquation(time): 
+        return tf.exp(-1. * time ** 2. / 2.) * tf.cos(5. * time) # https://www.mathworks.com/help/wavelet/ref/morlet.html
 
+    return waveletHelper(scale, sampleCount, waveEquation)
+
+def waveletHelper(scale, sampleCount, waveEquation):
+    scale         = tf.to_float(scale)
+    sampleCount   = tf.to_float(sampleCount)
+    unscaledTimes = tf.to_float(tf.range(tf.to_int32(sampleCount))) - (sampleCount - 1.) / 2.
+    times         = unscaledTimes / scale
+    wav           = waveEquation(times)
+    wav           = wav / tf.sqrt(tf.reduce_sum(wav * wav))  # Normalize energy to 1.0 , same as (wav = wav * scale ** -.5)
+    return wav
+
+# ------------------------------------------------------
+#                    helpers
 def conv1DWavelet(wav, waveletWidth, waveletEquation):
     kernelSamples = waveletWidth * 10
     kernel = waveletEquation(waveletWidth, kernelSamples)
@@ -87,3 +105,4 @@ def conv1DWavelet(wav, waveletWidth, waveletEquation):
     conv = tf.squeeze(tf.squeeze(conv))
 
     return conv
+
