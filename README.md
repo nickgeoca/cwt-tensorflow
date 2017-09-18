@@ -8,8 +8,8 @@ One caveat of using this is the accuracy. Currently this api and scipy's cwt bot
 See test.py for plotting the result and the cwtRicker function type in cwt.py.
 
 ## Usage
-![](https://github.com/nickgeoca/cwt-tensorflow/blob/master/mortletCWT.png)
 Run [test.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/test.py) example. It produces the plot below.
+![](https://github.com/nickgeoca/cwt-tensorflow/blob/master/mortletCWT.png)
 
 ## TODO
 * Add this line of code similar to scipy's [cwt](https://github.com/scipy/scipy/blob/63bcdc4eeafa59553c00e44343dbb38380bd9d45/scipy/signal/wavelets.py#L362): samples = min(10*width, len(wav))
