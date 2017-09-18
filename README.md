@@ -1,15 +1,18 @@
 # Tensorflow CWT
-This implements a 1-D Continuous Wavelet Transform (CWT) using a Ricker wavelet in tensorflow. It is very similar to scipy's cwt routine, excpet is slightly limited yet much faster.
+This implements a 1-D Continuous Wavelet Transform (CWT) using a Ricker wavelet in tensorflow. It is very similar to scipy's cwt routine.
 
 It has the advantage of running in parallel on a GPU and is about 8x faster than an old laptop i5 using a GTX 750 TI (~1,400 GFLOPS). This is done by using tensorflow's parallel while_loop function.
 
-One caveat of using this is the accuracy. Currently this api and scipy's cwt both limit the Ricker wavelet samples to 10x the scale size. What this means for both libarires is that they are both much faster at the cost of a very small numerical error.
-
-See test.py for plotting the result and the cwtRicker function type in cwt.py.
+The following wavelets are available:
+* Ricker wavelet - cwtRicker
+* Mortlet wavelet - cwtMortlet
 
 ## Usage
-Run [test.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/test.py) example. It produces the plot below.
+Run [test.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/test.py) example. It produces the plot below. The scale of the mortlet wavelet below is 32. 
 ![](https://github.com/nickgeoca/cwt-tensorflow/blob/master/mortletCWT.png)
+
+## Dev Notes
+This cwt and scipy's cwt both limit the Ricker wavelet samples to 10x the scale size to improve accuracy.
 
 ## TODO
 * Add this line of code similar to scipy's [cwt](https://github.com/scipy/scipy/blob/63bcdc4eeafa59553c00e44343dbb38380bd9d45/scipy/signal/wavelets.py#L362): samples = min(10*width, len(wav))
