@@ -80,6 +80,7 @@ def rickerWavelet(scale, sampleCount):
 def conv1DWavelet(wav, waveletWidth, waveletEquation):
     kernelSamples = waveletWidth * 10
     kernel = waveletEquation(waveletWidth, kernelSamples)
+    kernel = tf.reverse(kernel, [0])
     kernel = tf.reshape(kernel, tf.stack([kernelSamples,1,1,1]))
 
     conv = tf.nn.conv2d(wav, kernel, [1,1,1,1], padding='SAME') 
