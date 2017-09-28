@@ -13,7 +13,7 @@ Run [test.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/test.py) e
 
 ## Notes
 * The wavelet can be undersampled if the scale is too small. An example of this is seen below- the scale was set to 1. 
-![](undersampled-wavelet-p1.png)![](undersampled-wavelet-p2.png)
+![](undersampled-wavelet-p1.png "Mortlet Scale 1"){:height="30%" width="30%"} ![](undersampled-wavelet-p2.png "Mortlet Scale 1"){:height="30%" width="30%"}
 
 ## Dev Notes
 * This cwt and scipy's cwt both limit the Ricker wavelet samples to 10x the scale size to improve accuracy. 
