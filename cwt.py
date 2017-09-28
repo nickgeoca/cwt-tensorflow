@@ -90,7 +90,7 @@ def waveletHelper(scale, sampleCount, waveEquation):
     unscaledTimes = tf.to_float(tf.range(tf.to_int32(sampleCount))) - (sampleCount - 1.) / 2.
     times         = unscaledTimes / scale
     wav           = waveEquation(times)
-    wav           = wav / tf.sqrt(tf.reduce_sum(wav * wav))  # Normalize energy to 1.0 , same as (wav = wav * scale ** -.5)
+    wav           = wav * scale ** -.5
     return wav
 
 # ------------------------------------------------------
