@@ -13,10 +13,11 @@ Run [test.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/test.py) e
 
 ## Notes
 * The wavelet can be undersampled if the scale is too small. An example of this is seen below- the scale was set to 1. 
+<img src="https://github.com/nickgeoca/cwt-tensorflow/blob/master/undersampled-wavelet-p1.png" width="30%" height="30%"><img src="https://github.com/nickgeoca/cwt-tensorflow/blob/master/undersampled-wavelet-p2.png" width="30%" height="30%">
 
 ## Dev Notes
 * This cwt and scipy's cwt both limit the Ricker wavelet samples to 10x the scale size to improve accuracy. 
-<img src="https://github.com/nickgeoca/cwt-tensorflow/blob/master/undersampled-wavelet-p1.png" width="30%" height="30%"><img src="https://github.com/nickgeoca/cwt-tensorflow/blob/master/undersampled-wavelet-p2.png" width="30%" height="30%">
+
 ## TODO
 * Add this line of code similar to scipy's [cwt](https://github.com/scipy/scipy/blob/63bcdc4eeafa59553c00e44343dbb38380bd9d45/scipy/signal/wavelets.py#L362): samples = min(10*width, len(wav))
 * consier scipy's ability to specify the wavelet scale
