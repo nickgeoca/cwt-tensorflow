@@ -7,8 +7,10 @@ The following wavelets are available:
 * Ricker wavelet - cwtRicker
 * Mortlet wavelet - cwtMortlet
 
-## Usage
-Run [test.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/test.py) example. It produces the plot below. The scale of the mortlet wavelet below is 32. 
+## Examples
+* [wavExample.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/wavExample.py). The audio sample rate is scaled down to 8000 samples per second (instead of typical 44100).
+
+* [sinExample.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/sinExample.py). It produces the plot below. The wavelet used is show below (scale=32).
 ![](https://github.com/nickgeoca/cwt-tensorflow/blob/master/mortletCWT.png)
 
 ## Notes
