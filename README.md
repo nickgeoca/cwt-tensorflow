@@ -10,7 +10,7 @@ The following wavelets are available:
 ## Examples
 * [wavExample.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/wavExample.py). The audio sample rate is scaled down to 8000 samples per second (instead of typical 44100).
 
-* [sinExample.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/sinExample.py). It produces the plot below. The wavelet used is show below (scale=32).
+* [sinExample.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/sinExample.py). It produces the plot below. The wavelet used is shown below (scale=32).
 ![](https://github.com/nickgeoca/cwt-tensorflow/blob/master/mortletCWT.png)
 
 ## Notes
