@@ -1,11 +1,30 @@
 # Tensorflow CWT
-This implements a 1-D Continuous Wavelet Transform (CWT) using a Ricker wavelet in tensorflow. It is very similar to scipy's cwt routine.
-
-It has the advantage of running in parallel on a GPU and is about 8x faster than an old laptop i5 using a GTX 750 TI (~1,400 GFLOPS). This is done by using tensorflow's parallel while_loop function.
+This implements a 1-D Continuous Wavelet Transform (CWT) in tensorflow. The benefit is that it runs parallel on GPUs.
 
 The following wavelets are available:
 * Ricker wavelet - cwtRicker
 * Mortlet wavelet - cwtMortlet
+
+## Benchmarks
+The benchmarks are still being organized. It was done with tensorflow on a CPU (w/o AVX extensions, etc). Of course, a fair comparison is with a GPU. This will happen soon.
+
+Here are the results
+* Using a GPU, this repo is about 8x faster than cpu only. (old laptop i5 vs GTX 750 TI ~1,400 GFLOPS). 
+* This repo's CWT against Pywavelet's Haar transform (DWT) - Pywavelet is ~200,000x faster
+* This repo's CWT against Pywavelet's CWT - Pywavelet is 13x faster
+
+The last two are both with tensorflow CPUs of course. And DWT is always faster, so this is unsurprising.
+
+### Relavent data. This can be aquired by running `python benchmark.py`
+
+* DWT - sampleSize = 10000000
+    * pywavelet dwt haar: 0.06824707984924316
+    * pywavelet dwt db2: 0.08141493797302246
+    * pywavelet dwt db8: 0.14669179916381836
+
+* CWT - sampleSize = 10000; cwtWidth = 256
+    * pywavelet cwt mortlet: 1.1284675598144531
+    * tensorflow cwt mortlet: 14.783239364624023
 
 ## Examples
 * [wavExample.py](https://github.com/nickgeoca/cwt-tensorflow/blob/master/wavExample.py). The audio sample rate is scaled down to 8000 samples per second (instead of typical 44100).
