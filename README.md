@@ -15,13 +15,13 @@ Here are the results
 
 The last two are both with tensorflow CPUs of course. And DWT is always faster, so this is unsurprising.
 
-### Relavent data. This can be aquired by running `python benchmark.py`
+### Benchmark times 
+This can be aquired by running `python benchmark.py`
 
 * DWT - sampleSize = 10000000
     * pywavelet dwt haar: 0.06824707984924316
     * pywavelet dwt db2: 0.08141493797302246
     * pywavelet dwt db8: 0.14669179916381836
-
 * CWT - sampleSize = 10000; cwtWidth = 256
     * pywavelet cwt mortlet: 1.1284675598144531
     * tensorflow cwt mortlet: 14.783239364624023
