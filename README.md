@@ -6,14 +6,13 @@ The following wavelets are available:
 * Mortlet wavelet - cwtMortlet
 
 ## Benchmarks
-Regarding CWT performance of Tensorflow vs Pywavelet, Pywavelet is about 13 times faster. However, this is a CPU only benchmark without using AVX extensions and such on Tensorflow.
+Regarding CWT performance of Tensorflow vs Pywavelet, Pywavelet is about 13 times faster. However, this is a CPU only benchmark without using performance extensions, like AVX, on Tensorflow.
 
-Tensorflow GPU vs Tensorflow CPU - (old laptop i5 vs GTX 750 TI ~1,400 GFLOPS) 
-* **GPU is ~8x times faster CPU**
-
-Pywavelet CPU vs Tensorflow CPU - (Tensorflow w/o AVX extensions, etc)
-* CPU **Tensorflow CWT** vs CPU **Pywavelet DWT** (Haar) - Pywavelet DWT is ~200,000x faster
-* CPU **Tensorflow CWT** vs CPU **Pywavelet CWT** - Pywavelet is 13x faster
+| Col1          | Col2          | Result  | Notes |
+| ------------- |:-------------:| -----:| --- |
+| Tensorflow CWT - GPU | Tensorflow CWT - CPU | GPU ~8x faster                | old laptop i5 vs GTX 750 TI ~1,400 GFLOPS | 
+| Tensorflow CWT - CPU | Pywavelet CWT - CPU  | Pywavelet CWT ~13x faster     | Tensorflow w/o AVX extensions, etc |
+| Tensorflow CWT - CPU | Pywavelet DWT - CPU  | Pywavelet DWT ~200,000 faster | Haar wavelet; Tensorflow w/o AVX extensions, etc |
 
 ### Benchmark times 
 This can be aquired by running `python benchmark.py`
