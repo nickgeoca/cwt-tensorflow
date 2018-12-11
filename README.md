@@ -10,9 +10,9 @@ Regarding CWT performance of Tensorflow vs Pywavelet, Pywavelet is about 13 time
 
 | Col1          | Col2          | Result  | Notes |
 | ------------- |:-------------:| -----:| --- |
-| Tensorflow CWT - GPU | Tensorflow CWT - CPU | GPU ~8x faster                | old laptop i5 vs GTX 750 TI ~1,400 GFLOPS | 
-| Tensorflow CWT - CPU | Pywavelet CWT - CPU  | Pywavelet CWT ~13x faster     | Tensorflow w/o AVX extensions, etc |
-| Tensorflow CWT - CPU | Pywavelet DWT - CPU  | Pywavelet DWT ~200,000 faster | Haar wavelet; Tensorflow w/o AVX extensions, etc |
+| Tensorflow CWT (GPU) | Tensorflow CWT (CPU) | GPU ~8x faster                | old i5 vs GTX 750 TI ~1,400 GFLOPS | 
+| Tensorflow CWT (CPU) | Pywavelet CWT (CPU)  | Pywavelet CWT ~13x faster     | Tensorflow w/o AVX extensions, etc |
+| Tensorflow CWT (CPU) | Pywavelet DWT (CPU)  | Pywavelet DWT ~200,000 faster | Haar wavelet; Tensorflow w/o AVX extensions, etc |
 
 ### Benchmark times 
 This can be aquired by running `python benchmark.py`
