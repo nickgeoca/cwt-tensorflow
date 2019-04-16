@@ -1,3 +1,4 @@
+_if you are interested in becoming a collaborator let me know by creating an issue or gmail me nickgeoca_
 # Tensorflow CWT
 This implements a 1-D Continuous Wavelet Transform (CWT) in tensorflow. The benefit is that it runs parallel on GPUs.
 
